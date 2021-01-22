@@ -1,0 +1,11 @@
+
+h1{
+    text-decoration: underline; 
+    width: fit-content;
+    margin: auto;
+    padding: 10%;
+}
+.add-input{
+    width: 50%;
+    margin: auto;
+}
