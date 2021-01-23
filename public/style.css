@@ -27,7 +27,7 @@ h1{
     position: relative;
     width: 1.1em;
 }
-/* .rating > span:hover,
+.rating > span:hover,
 .rating > span:hover ~ span {
     color: transparent;
 }
@@ -37,15 +37,9 @@ h1{
     position: absolute;
     left: 0; 
     color: gold;
-} */
-.rating > span:checked,
-.rating > span:checked ~ span {
-    color: transparent;
 }
-.rating > span:checked:before,
-.rating > span:checked ~ span:before {
+.gold{
     content: "\2605";
-    position: absolute;
-    left: 0; 
     color: gold;
+    
 }
