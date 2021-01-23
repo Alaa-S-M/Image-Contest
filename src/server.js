@@ -1,36 +1,30 @@
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser');
 
 app.use(express.static('public'));
+app.use(bodyParser.json());
 
 const images = [
-    {src: 'example' }
+    { score: '0', src: 'https://joombig.com/demo-extensions1/images/gallery_slider/Swan_large.jpg' },
+
 ];
 
-// const users = [
-//     { name: 'Kilani', password: '222222222' },
-//     { name: 'Yara', password: '333333333' },
-//     { name: 'Ihab', password: '444444' }
-//   ];
-  
-  //routes
-//   app.get('/get-users', (req, res) => {
-  
-//     res.send(users)
-//   })
-
-
 app.post('/add-image', (req, res) => {
-    const {src} = req.body;
+    const { score, src } = req.body;
     console.log(src);
     const index = images.findIndex(image => image.src === src);
     if (index === -1) {
-        images.push({ src });
+        images.push({ score, src });
+        console.log('Pushed');
     }
-    res.send({ ok: true , src: src});
+    res.send({ ok: true });
 
 });
 
+app.get('/get-images', (req,res) => {
+    res.send(images);
+});
 
 const port = process.env.PORT || 3000;
 app.listen(port, function () {

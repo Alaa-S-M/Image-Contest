@@ -6,13 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
     <h1> Image Contest</h1>
     <div class="add-input">
-        <input class='image-src' placeholder="image URL"></input>
-        <button onclick="addImage(event)"> add image </button>
+        <input class='image-src' placeholder="add image URL"></input>
+        <button onclick="addImage()"> Add Image </button>
+    </div >
+    <div class="shaw-data">
+        <button onclick="getImages()"> Show Images </button>
+        <div class='un-sorted-images'></div>
+        <button onclick="sortImages()"> Sort Images </button>
+        <div class='sorted-images'></div>
     </div>
     <script src='index.js'></script>
 </body>

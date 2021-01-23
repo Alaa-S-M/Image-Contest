@@ -5,7 +5,47 @@ h1{
     margin: auto;
     padding: 10%;
 }
-.add-input{
-    width: 50%;
+.add-input,.shaw-data{
+    width: 90%;
     margin: auto;
+}
+
+.rate-image>img{
+    width: 250px;
+    margin: 10px;
+}
+.rate-image{
+    display: flex;
+    align-items: center;
+}
+.rating {
+    unicode-bidi: bidi-override;
+    direction: rtl;
+    text-align: center;
+}
+.rating > span {
+    position: relative;
+    width: 1.1em;
+}
+/* .rating > span:hover,
+.rating > span:hover ~ span {
+    color: transparent;
+}
+.rating > span:hover:before,
+.rating > span:hover ~ span:before {
+    content: "\2605";
+    position: absolute;
+    left: 0; 
+    color: gold;
+} */
+.rating > span:checked,
+.rating > span:checked ~ span {
+    color: transparent;
+}
+.rating > span:checked:before,
+.rating > span:checked ~ span:before {
+    content: "\2605";
+    position: absolute;
+    left: 0; 
+    color: gold;
 }
