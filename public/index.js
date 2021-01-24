@@ -25,16 +25,17 @@ function getImages() {
 
 function renderImages(images) {
     const root = document.querySelector('.un-sorted-images');
+    // const sortedRoot = document.querySelector('.sorted-images');
     let html = '';
     images.forEach(image => {
         html += `<div class='rate-image'> 
                 <img src=${image.src}>
                 <div class="rating">
-                    <span id="1" onclick="handleSatrs(event)">☆</span>
-                    <span id="2" onclick="handleSatrs(event)">☆</span>
-                    <span id="3" onclick="handleSatrs(event)">☆</span>
-                    <span id="4" onclick="handleSatrs(event)">☆</span>
                     <span id="5" onclick="handleSatrs(event)">☆</span>
+                    <span id="4" onclick="handleSatrs(event)">☆</span>
+                    <span id="3" onclick="handleSatrs(event)">☆</span>
+                    <span id="2" onclick="handleSatrs(event)">☆</span>
+                    <span id="1" onclick="handleSatrs(event)">☆</span>
                 </div>
             </div>`;
     });
@@ -42,13 +43,25 @@ function renderImages(images) {
     root.innerHTML = html;
 }
 
+function renderSortedImages(images) {
+    const sortedRoot = document.querySelector('.sorted-images');
+    let html = '';
+    images.forEach(image => {
+        html += `<div class='sort-image'> 
+                <img src=${image.src}>
+                <h1>${image.score}</h1>
+                </div>
+            </div>`;
+    });
+
+    sortedRoot.innerHTML = html;
+}
+
 function handleSatrs(e) {
     let stars = [...e.target.closest('.rating').children];
     console.log(stars)
-    //console.log('sdfdsfsdfsdfdsfdsfdsfsdf')
-    //console.log(e.target.id);
     stars.forEach((elm, index) => {
-        if (elm.id >= e.target.id) {
+        if (elm.id <= e.target.id) {
             elm.classList.add("gold");
         }     
     })
@@ -72,5 +85,11 @@ function updateScore(score,src){
 }
 
 function sortImages() {
+    console.log('get Images');
 
+    fetch('/sort-images')
+        .then(r => r.json())
+        .then(images => {
+            renderSortedImages(images);
+        });
 }

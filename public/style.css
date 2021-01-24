@@ -41,5 +41,14 @@ h1{
 .gold{
     content: "\2605";
     color: gold;
-    
+}
+
+.sort-image{
+    display: flex;
+    align-items: center;
+}
+
+.sort-image>img{
+    width: 250px;
+    margin: 10px;
 }

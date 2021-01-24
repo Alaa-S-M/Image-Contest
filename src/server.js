@@ -39,6 +39,13 @@ app.post('/update-score', (req, res) => {
 
 });
 
+app.get('/sort-images', (req,res) => {
+    images.sort(function (a, b) {
+        return b.score - a.score;
+      });
+    res.send(images);
+});
+
 const port = process.env.PORT || 3000;
 app.listen(port, function () {
     console.log('listening', port);
