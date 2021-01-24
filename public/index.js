@@ -60,9 +60,10 @@ function renderSortedImages(images) {
 function handleSatrs(e) {
     let stars = [...e.target.closest('.rating').children];
     console.log(stars)
-    stars.forEach((elm, index) => {
-        if (elm.id <= e.target.id) {
-            elm.classList.add("gold");
+    stars.forEach(el=> el.classList.remove("gold"));
+    stars.forEach(el => {
+        if (el.id <= e.target.id) {
+            el.classList.add("gold");
         }     
     })
     console.log(e.target.closest('.rate-image').firstElementChild.src+ ' === src ==== ');
