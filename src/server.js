@@ -6,43 +6,36 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 
 const images = [
-    { score: '0', src: 'https://joombig.com/demo-extensions1/images/gallery_slider/Swan_large.jpg' }
+    { score: 0, src: 'https://joombig.com/demo-extensions1/images/gallery_slider/Swan_large.jpg' }
 
 ];
 
 app.post('/add-image', (req, res) => {
     const { score, src } = req.body;
-    console.log(src);
     const index = images.findIndex(image => image.src === src);
     if (index === -1) {
         images.push({ score, src });
-        console.log('Pushed');
     }
     res.send({ ok: true });
 
 });
 
-app.get('/get-images', (req,res) => {
+app.get('/get-images', (req, res) => {
     res.send(images);
 });
 
 app.post('/update-score', (req, res) => {
     const { score, src } = req.body;
-    console.log(src);
     const index = images.findIndex(image => image.src === src);
     if (index > -1) {
-        images[index].score = score;
-        console.log('Updated');
+        images[index].score += parseInt(score);
     }
-    console.log(images[index].score)
     res.send({ ok: true });
 
 });
 
-app.get('/sort-images', (req,res) => {
-    images.sort(function (a, b) {
-        return b.score - a.score;
-      });
+app.get('/sort-images', (req, res) => {
+    images.sort((a, b) => b.score - a.score);
     res.send(images);
 });
 
