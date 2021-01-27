@@ -25,13 +25,12 @@ app.get('/get-images', (req, res) => {
 });
 
 app.post('/update-score', (req, res) => {
-    const { score, src } = req.body;
-    const index = images.findIndex(image => image.src === src);
-    if (index > -1) {
-        images[index].score += parseInt(score);
-    }
-    res.send({ ok: true });
-
+        const { score, src } = req.body;
+        const index = images.findIndex(image => image.src === src);
+        if (index > -1) {
+            images[index].score += parseInt(score);
+        }
+        res.send({ ok: true });
 });
 
 app.get('/sort-images', (req, res) => {

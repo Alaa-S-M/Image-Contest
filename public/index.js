@@ -57,14 +57,17 @@ function handleSatrs(e) {
 }
 
 function updateScore(score = 0, src) {
-    !!src && fetch('/update-score', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        }, body: JSON.stringify({ score, src })
-    })
-        .then(r => r.json());
-
+    if (!localStorage.getItem('userVotes')) {
+        !!src && fetch('/update-score', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }, body: JSON.stringify({ score, src })
+        })
+            .then(r => r.json());
+            
+        localStorage.setItem('userVotes', true);
+    }
 }
 
 function sortImages() {
