@@ -1,4 +1,9 @@
 
+
+let localImages = [
+
+];
+
 function addImage() {
     let srcInput = document.querySelector('.image-src-input'), score = 0;
     let src = !!srcInput && srcInput.value;
@@ -53,24 +58,36 @@ function handleSatrs(e) {
     });
     let score = parseInt(e.target.id),
         src = e.target.closest('.rate-image').firstElementChild.src;
-    updateScore(score, src);
+    updateScoreLocally(score, src);
 }
 
-function updateScore(score = 0, src) {
-    if (!localStorage.getItem('userVotes')) {
-        !!src && fetch('/update-score', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            }, body: JSON.stringify({ score, src })
-        })
-            .then(r => r.json());
-            
-        localStorage.setItem('userVotes', true);
+function updateScoreLocally(score = 0, src) {
+    let index = localImages.findIndex(image => image.src == src);
+    if (index == -1) {
+        localImages.push({ score, src });
+        return;
     }
+    localImages[index].score = score;
+}
+
+function updateScoresInServer() {
+    if (localStorage.getItem('user_already_voted')) {
+        alert('You Have Already Voted!');
+        return;
+    }
+    fetch('/update-score', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }, body: JSON.stringify({ localImages })
+    })
+        .then(r => r.json());
+    localStorage.setItem('user_already_voted', true);
+
 }
 
 function sortImages() {
+    updateScoresInServer();
     fetch('/sort-images')
         .then(r => r.json())
         .then(images => {
